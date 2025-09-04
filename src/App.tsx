@@ -1,30 +1,15 @@
-import { useEffect, useState } from "react";
-import { getPackages } from "./api/packageService";
-import type { Package } from "./types/package";
+import { Routes, Route } from "react-router-dom";
+import PackagesList from "./pages/PackagesList";
+import PackageDetails from "./pages/PackageDetails";
+import CreatePackage from "./pages/CreatePackage";
 
 function App() {
-  const [packages, setPackages] = useState<Package[]>([]);
-  const [loading, setLoading] = useState(true);
-
-  useEffect(() => {
-    getPackages()
-      .then(setPackages)
-      .finally(() => setLoading(false));
-  }, []);
-
-  if (loading) return <p>Loading...</p>;
-
   return (
-    <div style={{ padding: "20px" }}>
-      <h1>📦 Package Tracking</h1>
-      <ul>
-        {packages.map((p) => (
-          <li key={p.id}>
-            <strong>{p.trackingNumber}</strong> — {p.status} (from {p.senderName} to {p.recipientName})
-          </li>
-        ))}
-      </ul>
-    </div>
+    <Routes>
+      <Route path="/" element={<PackagesList />} />
+      <Route path="/packages/:id" element={<PackageDetails />} />
+      <Route path="/create" element={<CreatePackage />} />
+    </Routes>
   );
 }
 
