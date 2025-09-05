@@ -2,29 +2,29 @@ import axios from "axios";
 import type { Package, PackageStatus } from "../types/package";
 
 // ⚡️ Укажи свой backend URL
-const API_URL = "http://localhost:5259/api/packages";
+const API_BASE_URL = import.meta.env.VITE_API_URL || "http://localhost:5259";
 
-export async function getPackages(): Promise<Package[]> {
-  const { data } = await axios.get(API_URL);
-  return data;
-}
+export const getPackages = async () => {
+  const res = await axios.get<Package>(`${API_BASE_URL}/api/packages`);
+  return res.data as Package;
+};
 
-export async function getPackage(id: number): Promise<Package> {
-  const { data } = await axios.get(`${API_URL}/${id}`);
-  return data;
-}
+export const getPackage = async (id: number): Promise<Package> => {
+  const res = await axios.get<Package>(`${API_BASE_URL}/api/packages/${id}`);
+  return res.data;
+};
 
-export async function createPackage(pkg: Omit<Package, "id" | "trackingNumber" | "status" | "createdAt" | "history">): Promise<Package> {
-  const { data } = await axios.post(API_URL, pkg);
-  return data;
-}
+export const createPackage = async (pkg: Omit<Package, "id" | "trackingNumber" | "status" | "createdAt" | "history">): Promise<Package> => {
+  const res = await axios.get<Package>(`${API_BASE_URL}/api/packages`, pkg);
+  return res.data;
+};
 
-export async function getAllowedStatuses(id: number): Promise<PackageStatus[]> {
-  const { data } = await axios.get(`${API_URL}/${id}/allowed-statuses`);
-  return data;
-}
+export const getAllowedStatuses = async (id: number): Promise<PackageStatus[]> => {
+  const res = await axios.get<PackageStatus[]>(`${API_BASE_URL}/api/packages/${id}/allowed-statuses`);
+  return res.data;
+};
 
-export async function updateStatus(id: number, newStatus: PackageStatus): Promise<Package> {
-  const { data } = await axios.put(`${API_URL}/${id}/status`, { newStatus });
-  return data;
-}
+export const updateStatus = async (id: number, newStatus: PackageStatus): Promise<Package> => {
+  const res = await axios.put<Package>(`${API_BASE_URL}/api/packages/${id}/status`, { newStatus });
+  return res.data;
+};
