@@ -83,8 +83,8 @@ export default function PackageDetails() {
     setPendingStatus(null);
   };
 
-  // Цвета для Chip и TimelineDot (только допустимые MUI значения)
-  const getStatusColor = (
+  // Цвета для Chip (разрешен "default")
+  const getChipColor = (
     status: PackageStatus
   ): "default" | "primary" | "success" | "error" | "warning" | "info" => {
     switch (status) {
@@ -103,6 +103,34 @@ export default function PackageDetails() {
     }
   };
 
+  // Цвета для TimelineDot (❌ нет "default", используем "grey")
+  const getTimelineColor = (
+    status: PackageStatus
+  ):
+    | "primary"
+    | "success"
+    | "error"
+    | "warning"
+    | "info"
+    | "inherit"
+    | "secondary"
+    | "grey" => {
+    switch (status) {
+      case "Created":
+        return "primary";
+      case "Sent":
+        return "info";
+      case "Accepted":
+        return "success";
+      case "Returned":
+        return "warning";
+      case "Canceled":
+        return "error";
+      default:
+        return "grey";
+    }
+  };
+
   if (loading) return <p>Loading...</p>;
   if (!pkg) return <p>Package not found</p>;
 
@@ -118,7 +146,7 @@ export default function PackageDetails() {
           sx={{ display: "flex", alignItems: "center", gap: 1 }}
         >
           <strong>Status:</strong>
-          <Chip label={pkg.status} color={getStatusColor(pkg.status)} />
+          <Chip label={pkg.status} color={getChipColor(pkg.status)} />
         </Typography>
         <Typography>
           <strong>Sender:</strong> {pkg.senderName} ({pkg.senderAddress},{" "}
@@ -161,7 +189,7 @@ export default function PackageDetails() {
           .map((h, index) => (
             <TimelineItem key={h.id}>
               <TimelineSeparator>
-                <TimelineDot color={getStatusColor(h.status)} />
+                <TimelineDot color={getTimelineColor(h.status)} />
                 {index !== pkg.history.length - 1 && <TimelineConnector />}
               </TimelineSeparator>
               <TimelineContent>
