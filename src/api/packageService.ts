@@ -32,11 +32,12 @@ export const getAllowedStatuses = async (id: number): Promise<PackageStatus[]> =
 
 export const updateStatus = async (
   id: number,
-  status: PackageStatus
+  newStatus: PackageStatus
 ): Promise<Package> => {
   const res = await axios.put<Package>(
     `${API_BASE_URL}/api/packages/${id}/status`,
-    { status }
+    { newStatus }
   );
   return res.data;
 };
+
