@@ -25,10 +25,9 @@ export default function PackagesList() {
   const [statusFilter, setStatusFilter] = useState<PackageStatus | "All">("All");
 
   useEffect(() => {
-    getPackages().then(setPackages);
+    getPackages().then((data) => setPackages(Array.isArray(data) ? data : [data]));
   }, []);
 
-  // Фильтрация
   const filteredPackages = packages.filter((p) => {
     const matchesSearch = p.trackingNumber
       .toLowerCase()
@@ -38,7 +37,6 @@ export default function PackagesList() {
     return matchesSearch && matchesStatus;
   });
 
-  // Цвета для Chip (как в PackageDetails)
   const getStatusColor = (
     status: PackageStatus
   ): "default" | "primary" | "success" | "error" | "warning" | "info" => {
@@ -64,7 +62,7 @@ export default function PackagesList() {
         📦 Packages
       </Typography>
 
-      {/* Панель фильтров */}
+
       <Box sx={{ display: "flex", gap: 2, marginBottom: 3 }}>
         <TextField
           label="Search by tracking number"

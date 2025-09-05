@@ -6,7 +6,7 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import { TextField, Button, Box, Typography } from "@mui/material";
 
-// Схема валидации
+
 const schema = yup.object({
   senderName: yup.string().required("Sender name is required"),
   senderAddress: yup.string().required("Sender address is required"),

@@ -34,7 +34,7 @@ export default function PackageDetails() {
   const [allowedStatuses, setAllowedStatuses] = useState<PackageStatus[]>([]);
   const [loading, setLoading] = useState(true);
 
-  // Для модалки
+
   const [openDialog, setOpenDialog] = useState(false);
   const [pendingStatus, setPendingStatus] = useState<PackageStatus | null>(null);
 
@@ -83,7 +83,7 @@ export default function PackageDetails() {
     setPendingStatus(null);
   };
 
-  // Цвета для Chip (разрешен "default")
+
   const getChipColor = (
     status: PackageStatus
   ): "default" | "primary" | "success" | "error" | "warning" | "info" => {
@@ -103,7 +103,7 @@ export default function PackageDetails() {
     }
   };
 
-  // Цвета для TimelineDot (❌ нет "default", используем "grey")
+  
   const getTimelineColor = (
     status: PackageStatus
   ):
@@ -158,7 +158,7 @@ export default function PackageDetails() {
         </Typography>
       </Paper>
 
-      {/* Кнопки смены статуса */}
+      
       {allowedStatuses.length > 0 ? (
         <Box sx={{ marginBottom: 3 }}>
           <Typography variant="h6">Change Status</Typography>
@@ -178,7 +178,7 @@ export default function PackageDetails() {
         <Typography>No further status changes allowed.</Typography>
       )}
 
-      {/* Timeline истории */}
+    
       <Typography variant="h6" gutterBottom>
         Status History
       </Typography>
@@ -208,7 +208,7 @@ export default function PackageDetails() {
         ⬅ Back to list
       </Button>
 
-      {/* Модальное окно подтверждения */}
+    
       <Dialog open={openDialog} onClose={handleCancel}>
         <DialogTitle>Confirm Status Change</DialogTitle>
         <DialogContent>
