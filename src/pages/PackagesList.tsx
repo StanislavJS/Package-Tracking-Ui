@@ -2,6 +2,22 @@ import { useEffect, useState } from "react";
 import { getPackages } from "../api/packageService";
 import type { Package, PackageStatus } from "../types/package";
 import { Link } from "react-router-dom";
+import {
+  Box,
+  Button,
+  Chip,
+  MenuItem,
+  Select,
+  Table,
+  TableBody,
+  TableCell,
+  TableContainer,
+  TableHead,
+  TableRow,
+  TextField,
+  Typography,
+  Paper,
+} from "@mui/material";
 
 export default function PackagesList() {
   const [packages, setPackages] = useState<Package[]>([]);
@@ -17,94 +33,114 @@ export default function PackagesList() {
     const matchesSearch = p.trackingNumber
       .toLowerCase()
       .includes(search.toLowerCase());
-
     const matchesStatus =
       statusFilter === "All" ? true : p.status === statusFilter;
-
     return matchesSearch && matchesStatus;
   });
 
+  // Цвета для Chip (как в PackageDetails)
+  const getStatusColor = (
+    status: PackageStatus
+  ): "default" | "primary" | "success" | "error" | "warning" | "info" => {
+    switch (status) {
+      case "Created":
+        return "primary";
+      case "Sent":
+        return "info";
+      case "Accepted":
+        return "success";
+      case "Returned":
+        return "warning";
+      case "Canceled":
+        return "error";
+      default:
+        return "default";
+    }
+  };
+
   return (
-    <div style={{ padding: "20px" }}>
-      <h1>📦 Packages</h1>
+    <Box sx={{ padding: 3 }}>
+      <Typography variant="h4" gutterBottom>
+        📦 Packages
+      </Typography>
 
       {/* Панель фильтров */}
-      <div style={{ marginBottom: "15px" }}>
-        <input
-          type="text"
-          placeholder="Search by tracking number"
+      <Box sx={{ display: "flex", gap: 2, marginBottom: 3 }}>
+        <TextField
+          label="Search by tracking number"
           value={search}
           onChange={(e) => setSearch(e.target.value)}
-          style={{ marginRight: "10px", padding: "5px" }}
         />
 
-        <select
+        <Select
           value={statusFilter}
-          onChange={(e) => setStatusFilter(e.target.value as PackageStatus | "All")}
-          style={{ padding: "5px" }}
+          onChange={(e) =>
+            setStatusFilter(e.target.value as PackageStatus | "All")
+          }
+          displayEmpty
         >
-          <option value="All">All statuses</option>
-          <option value="Created">Created</option>
-          <option value="Sent">Sent</option>
-          <option value="Accepted">Accepted</option>
-          <option value="Returned">Returned</option>
-          <option value="Canceled">Canceled</option>
-        </select>
+          <MenuItem value="All">All statuses</MenuItem>
+          <MenuItem value="Created">Created</MenuItem>
+          <MenuItem value="Sent">Sent</MenuItem>
+          <MenuItem value="Accepted">Accepted</MenuItem>
+          <MenuItem value="Returned">Returned</MenuItem>
+          <MenuItem value="Canceled">Canceled</MenuItem>
+        </Select>
 
-        <Link to="/create" style={{ marginLeft: "20px" }}>
+        <Button
+          component={Link}
+          to="/create"
+          variant="contained"
+          color="primary"
+        >
           ➕ Create Package
-        </Link>
-      </div>
+        </Button>
+      </Box>
 
       {/* Таблица */}
       {filteredPackages.length === 0 ? (
-        <p>No packages found.</p>
+        <Typography>No packages found.</Typography>
       ) : (
-        <table
-          style={{
-            width: "100%",
-            borderCollapse: "collapse",
-            textAlign: "left",
-          }}
-        >
-          <thead>
-            <tr>
-              <th style={thStyle}>Tracking #</th>
-              <th style={thStyle}>Status</th>
-              <th style={thStyle}>Sender</th>
-              <th style={thStyle}>Recipient</th>
-              <th style={thStyle}>Created</th>
-              <th style={thStyle}>Actions</th>
-            </tr>
-          </thead>
-          <tbody>
-            {filteredPackages.map((p) => (
-              <tr key={p.id}>
-                <td style={tdStyle}>{p.trackingNumber}</td>
-                <td style={tdStyle}>{p.status}</td>
-                <td style={tdStyle}>{p.senderName}</td>
-                <td style={tdStyle}>{p.recipientName}</td>
-                <td style={tdStyle}>
-                  {new Date(p.createdAt).toLocaleDateString()}
-                </td>
-                <td style={tdStyle}>
-                  <Link to={`/packages/${p.id}`}>🔍 View</Link>
-                </td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
+        <TableContainer component={Paper}>
+          <Table>
+            <TableHead>
+              <TableRow>
+                <TableCell>Tracking #</TableCell>
+                <TableCell>Status</TableCell>
+                <TableCell>Sender</TableCell>
+                <TableCell>Recipient</TableCell>
+                <TableCell>Created</TableCell>
+                <TableCell>Actions</TableCell>
+              </TableRow>
+            </TableHead>
+            <TableBody>
+              {filteredPackages.map((p) => (
+                <TableRow key={p.id}>
+                  <TableCell>{p.trackingNumber}</TableCell>
+                  <TableCell>
+                    <Chip label={p.status} color={getStatusColor(p.status)} />
+                  </TableCell>
+                  <TableCell>{p.senderName}</TableCell>
+                  <TableCell>{p.recipientName}</TableCell>
+                  <TableCell>
+                    {new Date(p.createdAt).toLocaleDateString()}
+                  </TableCell>
+                  <TableCell>
+                    <Button
+                      component={Link}
+                      to={`/packages/${p.id}`}
+                      variant="outlined"
+                      size="small"
+                    >
+                      🔍 View
+                    </Button>
+                  </TableCell>
+                </TableRow>
+              ))}
+            </TableBody>
+          </Table>
+        </TableContainer>
       )}
-    </div>
+    </Box>
   );
 }
-
-const thStyle: React.CSSProperties = {
-  borderBottom: "2px solid #ccc",
-  padding: "8px",
-};
-
-const tdStyle: React.CSSProperties = {
-  borderBottom: "1px solid #eee",
-  padding: "8px",
-};

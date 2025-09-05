@@ -1,69 +1,116 @@
-# React + TypeScript + Vite
+---
+## 📂 `package-tracking-ui/README.md`
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+# 📦 Package Tracking UI
 
-Currently, two official plugins are available:
+Frontend application for the **Package Tracking System** (test task for IDT internship).
+Built with **React, TypeScript, Vite** and styled using **Material UI**.
+---
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## ✨ Features
 
-## Expanding the ESLint configuration
+- 📋 List of packages in a responsive **Material UI Table**
+- 🔍 Filtering by tracking number and status
+- 🟢 Color indicators for package statuses
+- 📦 Package details page with:
+  - Status history in **Timeline**
+  - Change status with confirmation **modal dialog**
+- ➕ Create package form with validation (React Hook Form + Yup)
+- ✅ Toast notifications (React Hot Toast)
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+---
 
-```js
-export default tseslint.config([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+## 🛠 Tech Stack
 
-      // Remove tseslint.configs.recommended and replace with this
-      ...tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      ...tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      ...tseslint.configs.stylisticTypeChecked,
+- **React 18 + TypeScript**
+- **Vite** as build tool
+- **React Router v6** for navigation
+- **Material UI (MUI)** for UI components
+- **React Hook Form + Yup** for forms & validation
+- **React Hot Toast** for notifications
+- **Axios** for API requests
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+---
+
+## 🚀 Getting Started
+
+### 1. Clone the repository
+
+```bash
+git clone https://github.com/<your-username>/package-tracking-ui.git
+cd package-tracking-ui
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+### 2. Install dependencies
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+```bash
+npm install
+```
 
-export default tseslint.config([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+### 3. Run the development server
+
+```bash
+npm run dev
+```
+
+The app will be available at:
+👉 `http://localhost:5173/`
+
+---
+
+## 🔗 API Integration
+
+This frontend connects to the **Package Tracking API** (ASP.NET Core backend).
+Make sure the backend is running locally on `http://localhost:5259` or update the API base URL in:
+
+```
+src/api/packageService.ts
+```
+
+---
+
+## 📂 Project Structure
+
+```
+src/
+ ├── api/              # API service (Axios)
+ ├── pages/            # App pages (PackagesList, PackageDetails, CreatePackage)
+ ├── types/            # TypeScript types
+ ├── App.tsx           # Routes
+ ├── main.tsx          # Entry point
+```
+
+---
+
+## 📸 Screenshots
+
+### Package List
+
+![Packages List](docs/packages-list.png)
+
+### Package Details
+
+![Package Details](docs/package-details.png)
+
+### Create Package Form
+
+![Create Package](docs/create-package.png)
+
+---
+
+## ✅ To Do / Nice to Have
+
+- Add animations with **Framer Motion**
+- Dark mode support
+- Deploy demo to Vercel
+
+---
+
+## 📄 License
+
+MIT License
+
+```
+
+---
 ```

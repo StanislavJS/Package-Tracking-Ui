@@ -3,7 +3,7 @@ import PackagesList from "./pages/PackagesList";
 import PackageDetails from "./pages/PackageDetails";
 import CreatePackage from "./pages/CreatePackage";
 
-function App() {
+function MainApp() {
   return (
     <Routes>
       <Route path="/" element={<PackagesList />} />
@@ -13,4 +13,4 @@ function App() {
   );
 }
 
-export default App;
+export default MainApp;
