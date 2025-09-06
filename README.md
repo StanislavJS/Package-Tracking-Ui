@@ -1,45 +1,52 @@
----
-## 📂 `package-tracking-ui/README.md`
+**README.md**
 
 # 📦 Package Tracking UI
 
-Frontend application for the **Package Tracking System** (test task for IDT internship).
-Built with **React, TypeScript, Vite** and styled using **Material UI**.
----
-
-## ✨ Features
-
-- 📋 List of packages in a responsive **Material UI Table**
-- 🔍 Filtering by tracking number and status
-- 🟢 Color indicators for package statuses
-- 📦 Package details page with:
-  - Status history in **Timeline**
-  - Change status with confirmation **modal dialog**
-- ➕ Create package form with validation (React Hook Form + Yup)
-- ✅ Toast notifications (React Hot Toast)
+Frontend application for **Package Tracking System**.  
+Built with **React + TypeScript + Vite** and connected to the backend API.
 
 ---
 
-## 🛠 Tech Stack
+## 🌐 Live Demo
 
-- **React 18 + TypeScript**
-- **Vite** as build tool
-- **React Router v6** for navigation
-- **Material UI (MUI)** for UI components
-- **React Hook Form + Yup** for forms & validation
-- **React Hot Toast** for notifications
-- **Axios** for API requests
+- **Frontend (Vercel):** https://package-tracking-ui.vercel.app ✅
+- **Backend Swagger (Render):** https://package-tracking-api-vj76.onrender.com/swagger/index.html ✅
 
 ---
 
-## 🚀 Getting Started
+## 🚀 Features
 
-### 1. Clone the repository
+- View all packages with their current status.
+- Create new packages via a form.
+- Update package status (with validation according to rules).
+- Status history visualization (timeline).
+- Toast notifications for success/error actions.
+- Modal confirmation before status changes.
+- Responsive UI with **Material UI** components.
+
+---
+
+## 🛠️ Tech Stack
+
+- **React 18** + **TypeScript**
+- **Vite**
+- **Axios** (API requests)
+- **React Router v6**
+- **Material UI (MUI)**
+- **React Hot Toast**
+
+---
+
+## ▶️ Getting Started
+
+### 1. Clone the repo
 
 ```bash
-git clone https://github.com/<your-username>/package-tracking-ui.git
+git clone https://github.com/your-username/package-tracking-ui.git
 cd package-tracking-ui
 ```
+
+````
 
 ### 2. Install dependencies
 
@@ -47,37 +54,29 @@ cd package-tracking-ui
 npm install
 ```
 
-### 3. Run the development server
+### 3. Run locally
 
 ```bash
 npm run dev
 ```
 
-The app will be available at:
+Local dev will start at:
 👉 `http://localhost:5173/`
 
 ---
 
-## 🔗 API Integration
+## 🔗 Environment Variables
 
-This frontend connects to the **Package Tracking API** (ASP.NET Core backend).
-Make sure the backend is running locally on `http://localhost:5259` or update the API base URL in:
-
-```
-src/api/packageService.ts
-```
-
----
-
-## 📂 Project Structure
+Create `.env` file in the root:
 
 ```
-src/
- ├── api/              # API service (Axios)
- ├── pages/            # App pages (PackagesList, PackageDetails, CreatePackage)
- ├── types/            # TypeScript types
- ├── App.tsx           # Routes
- ├── main.tsx          # Entry point
+VITE_API_URL=http://localhost:5259
+```
+
+For production (Vercel) it uses:
+
+```
+VITE_API_URL=https://package-tracking-api-vj76.onrender.com
 ```
 
 ---
@@ -86,31 +85,32 @@ src/
 
 ### Package List
 
-![Packages List](docs/packages-list.png)
+![Package List](docs/screenshots/packages-list.png)
 
 ### Package Details
 
-![Package Details](docs/package-details.png)
+![Package Details](docs/screenshots/package-details.png)
 
-### Create Package Form
+### Create Package
 
-![Create Package](docs/create-package.png)
-
----
-
-## ✅ To Do / Nice to Have
-
-- Add animations with **Framer Motion**
-- Dark mode support
-- Deploy demo to Vercel
+![Create Package](docs/screenshots/create-package.png)
 
 ---
 
-## 📄 License
+## ✅ Evaluation Criteria
 
-MIT License
+- Clean architecture with React Router.
+- TypeScript types for data models.
+- User-friendly UI with Material UI.
+- Proper API integration (CRUD, status updates).
+- Deployment on **Vercel** (UI) + **Render** (API).
 
 ```
 
 ---
+
+👉 Рекомендую создать папку `docs/screenshots/` и сделать 2–3 скриншота (листинг, детали, создание) — это сильно улучшит впечатление при проверке.
+
+Хочешь, я помогу тебе с git-командами, чтобы красиво закоммитить этот README и скриншоты в `frontend`-репозиторий?
 ```
+````
