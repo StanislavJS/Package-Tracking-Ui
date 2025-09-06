@@ -84,13 +84,13 @@ VITE_API_URL=https://package-tracking-api-vj76.onrender.com
 ##  Screenshots
 
 ### Package List
-![Package List](https://raw.githubusercontent.com/StanislavJS/Package-Tracking-Ui/main/docs/screenshots/packages-list.png)
+![Package List](https://raw.githubusercontent.com/StanislavJS/PackageTrackingUi/main/docs/screenshots/packages-list.png)
 
 ### Package Details
-![Package Details](https://raw.githubusercontent.com/StanislavJS/Package-Tracking-Ui/main/docs/screenshots/package-details.png)
+![Package Details](https://raw.githubusercontent.com/StanislavJS/PackageTrackingUi/main/docs/screenshots/package-details.png)
 
 ### Create Package
-![Create Package](https://raw.githubusercontent.com/StanislavJS/Package-Tracking-Ui/main/docs/screenshots/create-package.png)
+![Create Package](https://raw.githubusercontent.com/StanislavJS/PackageTrackingUi/main/docs/screenshots/create-package.png)
 
 
 ---
