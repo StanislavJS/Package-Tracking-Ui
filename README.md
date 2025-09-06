@@ -84,13 +84,13 @@ VITE_API_URL=https://package-tracking-api-vj76.onrender.com
 ## Screenshots
 
 ### Package List
-![Package List](./docs/screenshots/packages-list.png)
+![Package List](./docs/screenshots/packages-list-1.png)
 
 ### Package Details
-![Package Details](./docs/screenshots/package-details.png)
+![Package Details](./docs/screenshots/package-details-1.png)
 
 ### Create Package
-![Create Package](./docs/screenshots/create-package.png)
+![Create Package](./docs/screenshots/create-package-1.png)
 
 
 ---
